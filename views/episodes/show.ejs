@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="columns is-multiline-mobile">
+    <div class="column is-half-desktop is-12-mobile">
+      <img src="<%= episode.image %>" alt="<%= episode.title %>">
+    </div>
+    <div class="column is-half-desktop is-12-mobile">
+      <h2 class="title is-2"><%= episode.title %></h2>
+      <p><%= episode.synopsis %></p>
+      <% episode.cast.forEach(castMember => { %>
+        <img src="<%= castMember.image %>" alt="<%= castMember.fistname %> <%= castMember.lastname %>">
+        <p><a href="/castmembers/<%= castMember.id %>"><%= castMember.firstname %> <%= castMember.lastname %></a></p>
+      <% }) %>
+    </div>
+  </div>
+</div>

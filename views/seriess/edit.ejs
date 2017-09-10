@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 class="title is-1">Edit an existing series</h1>
+  <div class="columns">
+    <div class="column is-half">
+      <form method="POST" action="/seriess/<%= series.id %>">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="field">
+          <label class="label">Series Name</label>
+          <div class="control">
+            <input class="input" name="seriesName" type="text" placeholder="Series Name" required value="<%= series.seriesName %>">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Image</label>
+          <div class="control">
+            <input class="input" name="image" type="text" placeholder="Image" value="<%= series.image %>">
+          </div>
+        </div>
+        <div class="control">
+          <button class="button is-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
