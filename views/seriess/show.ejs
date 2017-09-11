@@ -1,27 +1,46 @@
 <div class="container">
   <div class="box">
-    <div class="clumns is-multiline-mobile">
+    <div class="columns is-multiline-mobile">
       <div class="column is-one-half-desktop is-12-mobile">
         <img class="image is2by3" src="<%= series.image %>" alt="<%= series.seriesName %>">
       </div>
       <div class="column is-one-half-desktop is-12-mobile">
         <h2 class="title is-2"><%= series.seriesName %></h2>
 
-        <a class="button is-info" href="seriess/<%= series.id %>/edit">Edit series</a>
-        <form action="/seriess/<%= series.id %>" method="POST">
-          <input type="hidden" name="_method" value="DELETE">
-          <button class="button is-danger">Delete Series</button>
-        </form>
-
+        <% if(locals.isAuthenticated) { %>
+          <div class="columns">
+            <div class="column is-half">
+              <a class="button is-info" href="/seriess/<%= series.id %>/edit">Edit series</a>
+            </div>
+            <div class="column is-half">
+              <form action="/seriess/<%= series.id %>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="button is-danger">Delete Series</button>
+              </form>
+            </div>
+          </div>
+        <% } %>
 
         <h3 class="title is-3">Episode List</h3>
 
-        <% series.episodes.forEach( episode => { %>
-
-          <p><img src="<%= episode.image %>" alt="<%= episode.title %>"><a href="/episodes/<%= episode.id %>"><%= episode.title %></a></p>
-
+        <% episodes.forEach( episode => { %>
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <a href="/episodes/<%= episode.id %>"><img src="<%= episode.image %>" alt="<%= episode.title %>"></a>
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <a href="/episodes/<%= episode.id %>"><strong><%= episode.title %></strong></a>
+                </p>
+              </div>
+            </div>
+          </article>
         <% }) %>
 
+      </div>
     </div>
   </div>
 </div>

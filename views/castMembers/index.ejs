@@ -1,1 +1,14 @@
-<h1>Cast Index</h1>
+<div class="container">
+  <h1 class="title is-1">Star Trek cast members</h1>
+  <p class="subtitle is-3">These are all the actors that have appeared in Star Trek</p>
+  <div class="columns is-multiline">
+    <% castMembers.forEach((castMember => { %>
+      <div class="column is-one-third-desktop is-one-half-mobile">
+        <div class="box">
+            <a href="/castmembers/<%= castMember.id %>"><img class="castmembers image" src="<%= castMember.image %>" alt="<%= castMember.firstname %> <%= castMember.lastname %>"></a>
+          <a href="/castmembers/<%= castMember.id %>"><h2 class="title is-4"><%= castMember.firstname %> <%= castMember.lastname %></h2></a>
+        </div>
+      </div>
+    <% })) %>
+  </div>
+</div>

@@ -5,9 +5,7 @@
     <% seriess.forEach((series => { %>
       <div class="column is-one-third-desktop is-one-half-mobile">
         <div class="box">
-          <div class="container">
-            <a href="/seriess/<%= series.id %>"><img class="image" src="<%= series.image %>" alt="<%= series.seriesName %>"></a>
-          </div>
+            <a href="/seriess/<%= series.id %>"><img class="seriess image" src="<%= series.image %>" alt="<%= series.seriesName %>"></a>
           <a href="/seriess/<%= series.id %>"><h2 class="title is-2"><%= series.seriesName %></h2></a>
         </div>
       </div>

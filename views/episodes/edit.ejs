@@ -1,1 +1,72 @@
-<h1>Episodes Edit</h1>
+<div class="container">
+  <h1 class="title is-1">Edit an episode</h1>
+  <div class="columns">
+    <div class="column is-half">
+      <form method="POST" action="/episodes/<%= episode.id %>">
+
+        <input type="hidden" name="_method" value="PUT">
+
+        <div class="field">
+          <label class="label">Episode Title</label>
+          <div class="control">
+            <input class="input" name="title" type="text" placeholder="Episode title" required value="<%= episode.title %>">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Series</label>
+          <div class="control">
+            <div class="select">
+              <select name="series">
+                <% series.forEach(series => { %>
+                  <option value="<%= series.id %>"><%= series.seriesName %></option
+                  <% if(episode.series === series.id) { %>
+                    selected
+                  <% } %>
+                  >
+                <% }) %>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="cast">Add cast members</label>
+          <div class="control">
+            <div class="select is-multiple">
+              <select class="" name="castMembers" multiple="multiple">
+                <% castMembers.forEach(castMember => { %>
+
+                  <option value="<%= castMember.id %>" <% if(castMember.appearsIn(episode)) { %>
+                    selected
+                  <% } %>>
+                    <%= castMember.firstname %> <%= castMember.lastname %>
+                  </option>
+
+                <% }) %>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Synopsis</label>
+          <div class="control">
+            <input class="input" name="synopsis" type="text" placeholder="Synopsis" value="<%= episode.synopsis %>">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Image</label>
+          <div class="control">
+            <input class="input" name="image" type="text" placeholder="Image" value="<%= episode.image %>">
+          </div>
+        </div>
+
+        <div class="control">
+          <button class="button is-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

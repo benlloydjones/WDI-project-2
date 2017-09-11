@@ -1,4 +1,5 @@
 const Series = require('../models/series');
+const Episode = require('../models/episode');
 
 function seriessIndex(req, res) {
   Series
@@ -11,9 +12,15 @@ function seriessIndex(req, res) {
 function seriessShow(req, res) {
   Series
     .findById(req.params.id)
-    .populate('episodes')
     .exec()
-    .then(series => res.render('seriess/show', { series }))
+    .then(series => {
+      return Episode
+        .find({series: series.id})
+        .exec()
+        .then(episodes => {
+          res.render('seriess/show', { episodes, series });
+        });
+    })
     .catch(err => res.render('error', { err }));
 }
 

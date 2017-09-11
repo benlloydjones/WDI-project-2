@@ -6,10 +6,41 @@
     <div class="column is-half-desktop is-12-mobile">
       <h2 class="title is-2"><%= episode.title %></h2>
       <p><%= episode.synopsis %></p>
-      <% episode.cast.forEach(castMember => { %>
-        <img src="<%= castMember.image %>" alt="<%= castMember.fistname %> <%= castMember.lastname %>">
-        <p><a href="/castmembers/<%= castMember.id %>"><%= castMember.firstname %> <%= castMember.lastname %></a></p>
+
+
+      <% if(locals.isAuthenticated) { %>
+        <div class="columns">
+          <div class="column is-half">
+            <a class="button is-info" href="/episodes/<%= episode.id %>/edit">Edit episode</a>
+          </div>
+          <div class="column is-half">
+            <form action="/episodes/<%= episode.id %>" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="button is-danger">Delete Episode</button>
+            </form>
+          </div>
+        </div>
+      <% } %>
+
+      <h3 class="title is-3">Cast list</h3>
+
+      <% episode.castMembers.forEach( castMember => { %>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <a href="/castmembers/<%= castMember.id %>"><img src="<%= castMember.image %>" alt="<%= castMember.firstname %> <%= castMember.lastname %>"></a>
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <a href="/castmembers/<%= castMember.id %>"><strong><%= castMember.firstname %> <%= castMember.lastname %></strong></a>
+              </p>
+            </div>
+          </div>
+        </article>
       <% }) %>
+
     </div>
   </div>
 </div>

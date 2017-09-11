@@ -6,8 +6,39 @@
       </div>
       <div class="column is-half-desktop is-12-mobile">
         <h2 class="title is-2"><%= castMember.firstname %> <%= castMember.lastname %></h2>
-        <% episodes.forEach(episode => { %>
-          <p><a href="/episodes/<%= episode.id %>"><%= episode.title %></a></p>
+
+        <% if (locals.isAuthenticated) { %>
+          <div class="columns">
+            <div class="column is-half">
+              <a class="button is-info" href="/castmembers/<%= castMember.id %>/edit">Edit cast member</a>
+            </div>
+            <div class="column is-half">
+              <form action="/castmembers/<%= castMember.id %>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="button is-danger">Delete cast member</button>
+              </form>
+            </div>
+          </div>
+        <% } %>
+
+        Episodes:
+        <% castMember.episodes.forEach(episode => { %>
+
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <a href="/episodes/<%= episode.id %>"><img src="<%= episode.image %>" alt="<%=episode.title %>"></a>
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <a href="/episodes/<%= episode.id %>"><strong><%= episode.title %></strong></a>
+                </p>
+              </div>
+            </div>
+          </article>
+
         <% }) %>
       </div>
     </div>

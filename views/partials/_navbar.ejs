@@ -1,0 +1,37 @@
+<div class="navbar-menu">
+  <div class="navbar-start">
+
+    <a class="navbar-item" href="/">
+      <img src="/assets/images/starFleet.png" width="20" height="39" alt="Star Fleet">
+    </a>
+
+    <a class="navbar-item" href="/seriess">Series</a>
+
+    <a class="navbar-item" href="/episodes">Episodes</a>
+
+    <a class="navbar-item" href="/castmembers">Actors</a>
+
+  </div>
+
+  <div class="navbar-end">
+
+  <% if(locals.isAuthenticated) { %>
+
+    <a class="navbar-item" href="/seriess/new">add Series</a>
+
+    <a class="navbar-item" href="/episodes/new">add Episode</a>
+
+    <a class="navbar-item" href="/castmembers/new">add Actor</a>
+
+    <a class="navbar-item" href="/logout">Logout</a>
+
+  <% } else { %>
+
+    <a class="navbar-item" href="/register">Register</a>
+
+    <a class="navbar-item" href="/login">Login</a>
+
+  <% } %>
+
+  </div>
+</div>

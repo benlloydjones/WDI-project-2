@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="title is-1">Add cast members to this episode</h1>
+
+  <form class="" action="edit/" method="POST">
+
+    <input type="hidden" name="_method" value="PUT">
+
+    <div class="field">
+      <label class="label" for="cast">Add cast members</label>
+      <div class="control">
+        <div class="select is-multiple">
+          <select class="" name="cast" multiple="multiple">
+            <% castMembers.forEach(castMember => { %>
+
+              <option value="<%= castMember.id %>"><%= castMember.firstname %> <%= castMember.lastname %></option>
+
+            <% }) %>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="control">
+      <button class="button is-primary">Submit</button>
+    </div>
+
+  </form>
+
+</div>

@@ -1,1 +1,50 @@
-<h1>Cast New</h1>
+<div class="container">
+  <h1 class="title is-1">Add a new cast member</h1>
+  <div class="columns">
+    <div class="column is-half">
+      <form method="POST" action="/castMembers">
+        <div class="field">
+          <label class="label">First Name</label>
+          <div class="control">
+            <input class="input" name="firstname" type="text" placeholder="First Name" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Last Name</label>
+          <div class="control">
+            <input class="input" name="lastname" type="text" placeholder="Last Name" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Image</label>
+          <div class="control">
+            <input class="input" name="image" type="text" placeholder="Image">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Episode</label>
+          <div class="control">
+            <div class="select">
+              <select class="castMemberMultipleEpisode" multiple="multiple" name="episodes">
+                <% episodes.forEach(episode => { %>
+                  <option value="<%= episode.id %>"><%= episode.title %></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-half">
+          <div class="control">
+            <button class="button is-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
