@@ -37,6 +37,9 @@
         <div class="form">
           <div class="commentAdder box">
             <form method="POST" action="<%= episode.id %>/comments">
+
+              <input class="input" type="hidden" name="_method" value="PUT">
+
               <input class="input" type="hidden" name="commentor" value="<%= locals.currentUser.id %>">
               <div class="field">
                 <label class="label" for="comment">Your comment:</label>
@@ -73,6 +76,8 @@
       <h2 class="title is-2"><%= episode.title %></h2>
       <p>
         <%= episode.synopsis %>
+        <br>
+        Average episode rating: <%= episode.avgRating %>/10
       </p>
       <% if(locals.isAuthenticated) { %>
         <div class="columns">

@@ -17,11 +17,13 @@
 
   <% if(locals.isAuthenticated) { %>
 
-    <a class="navbar-item" href="/seriess/new">add Series</a>
+    <a class="navbar-item" href="/seriess/new">add series</a>
 
-    <a class="navbar-item" href="/episodes/new">add Episode</a>
+    <a class="navbar-item" href="/episodes/new">add episode</a>
 
-    <a class="navbar-item" href="/castmembers/new">add Actor</a>
+    <a class="navbar-item" href="/castmembers/new">add actor</a>
+
+    <a class="navbar-item" href="/register/<%= locals.currentUser.id %>/edit">edit profile</a>
 
     <a class="navbar-item" href="/logout">Logout</a>
 

@@ -14,6 +14,12 @@ router.route('/register')
   .get(registrations.new)
   .post(registrations.create);
 
+router.route('/register/:id/edit')
+  .get(secureRoute, registrations.edit);
+
+router.route('/register/:id')
+  .put(secureRoute, registrations.update);
+
 // these are the series routes
 router.route('/seriess')
   .get(seriess.index)
@@ -48,9 +54,9 @@ router.route('/episodes/:id/edit')
 
 // episode comments routes
 router.route('/episodes/:id/comments')
-  .post(secureRoute, episodes.commentsCreate);
+  .put(secureRoute, episodes.commentsCreate);
 
-router.route('/episodes/:id/comments/:commentsId')
+router.route('/episodes/:id/comments/:commentId')
   .delete(secureRoute, episodes.commentsDelete);
 
 // these are the castMember routes

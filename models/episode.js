@@ -23,7 +23,22 @@ episodeSchema.virtual('castMembers', {
     this._castMembers = castMembers;
   });
 
+episodeSchema.virtual('avgRating')
+  .get(function getAvgRating() {
+    if(this.comments.length > 0) {
+      let total = 0;
+      this.comments.forEach(comment => total += comment.rating);
+      const avg = total / this.comments.length;
+      return Math.round(avg*2)/2;
+    } else {
+      return 0;
+    }
+  });
+
 episodeSchema.pre('save', function addMemberToEpisode(next) {
+
+  if(this.isModified('comments')) return next();
+
   this._castMembers = this._castMembers || [];
   const CastMember = this.model('CastMember');
   CastMember

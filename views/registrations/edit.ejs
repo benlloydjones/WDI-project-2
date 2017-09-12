@@ -1,24 +1,41 @@
 <div class="container">
   <div class="columns">
     <div class="column is-half-desktop is-1-mobile">
-      <form method="POST"  action="/register">
+      <form method="POST"  action="/register/<%= user.id %>">
+
+        <input type="hidden" name="_method" value="PUT">
+
+        <% if(user.admin) { %>
+          <div class="field">
+            <label class="label">Admin user</label>
+            <div class="control">
+              <div class="select">
+                <select name="admin">
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        <% } %>
+
         <div class="field">
           <label class="label">Username</label>
           <div class="control">
-            <input class="input" name="username" type="text" placeholder="Username" required>
+            <input class="input" name="username" type="text" placeholder="Username" required value="<%= user.username %>">
           </div>
         </div>
         <div class="field">
           <label class="label">Email</label>
           <div class="control">
-            <input class="input" name="email" type="text" placeholder="Email" required>
+            <input class="input" name="email" type="text" placeholder="Email" required value="<%= user.email %>">
           </div>
         </div>
 
         <div class="field">
           <label class="label">Image</label>
           <div class="control">
-            <input class="input" name="image" type="text" placeholder="Image link">
+            <input class="input" name="image" type="text" placeholder="Image link" value="<%= user.image %>">
           </div>
         </div>
 
@@ -35,7 +52,7 @@
           </div>
         </div>
         <div class="control">
-          <button class="button is-primary">Register</button>
+          <button class="button is-primary">Update</button>
         </div>
       </form>
     </div>
