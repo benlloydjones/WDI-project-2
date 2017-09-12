@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
 
+const commentsSchema = mongoose.Schema({
+  commentor: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  comment: { type: String, required: true },
+  rating: Number
+});
+
 const episodeSchema = mongoose.Schema({
   title: { type: String, required: true },
   series: { type: mongoose.Schema.ObjectId, ref: 'Series', required: true },
   synopsis: String,
-  image: String
+  image: String,
+  comments: [commentsSchema]
 });
 
 episodeSchema.virtual('castMembers', {

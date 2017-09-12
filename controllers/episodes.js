@@ -15,6 +15,7 @@ function episodesShow(req, res) {
   Episode
     .findById(req.params.id)
     .populate('castMembers')
+    .populate('comments.commentor')
     .exec()
     .then(episode => {
       res.render('episodes/show', { episode });
@@ -23,10 +24,16 @@ function episodesShow(req, res) {
 }
 
 function episodesNew(req, res) {
-  Series
-    .find()
-    .exec()
-    .then(seriess => res.render('episodes/new', { seriess }))
+
+  const data = {
+    episode: Episode.findById(req.params.id).exec(),
+    series: Series.find().exec(),
+    castMembers: CastMember.find().exec()
+  };
+
+  Promise
+    .props(data)
+    .then(data => res.render('episodes/new', data))
     .catch(err => res.render('error', { err }));
 }
 
@@ -73,24 +80,35 @@ function episodesDelete(req, res) {
     .catch(err => res.render('error', { err }));
 }
 
-// function episodesCastEdit(req, res) {
-//   Episode
-//     .findById(req.params.id)
-//     .exec()
-//     .then(episode => {
-//       return CastMember
-//         .find()
-//         .exec()
-//         .then(castMembers => {
-//           res.render('episodes/cast/edit', { episode, castMembers });
-//         });
-//     })
-//     .catch(err => res.render('error', { err }));
-// }
-//
-// function episodesCastUpdate(req) {
-//   req.body;
-// }
+function episodesCommentsDelete(req, res) {
+  Episode
+    .findById(req.params.id)
+    .exec()
+    .then(episode => {
+      const comment = episode.comments.id(req.params.commentId);
+      comment.remove();
+      return episode.save();
+    })
+    .then(episode => res.redirect(`/episodes/${episode.id}`))
+    .catch((err) => {
+      res.status(500).render('error', { err });
+    });
+}
+
+function episodesCommentsCreate(req, res) {
+  Episode
+    .findById(req.params.id)
+    .exec()
+    .then(episode => {
+      episode.comments.push(req.body);
+      return episode.save();
+    })
+    .then(episode => res.redirect(`/episodes/${episode.id}`))
+    .catch((err) => {
+      res.status(500).render('error', { err });
+    });
+}
+
 
 module.exports = {
   index: episodesIndex,
@@ -99,7 +117,7 @@ module.exports = {
   create: episodesCreate,
   edit: episodesEdit,
   update: episodesUpdate,
-  delete: episodesDelete
-  // castEdit: episodesCastEdit,
-  // castUpdate: episodesCastUpdate
+  delete: episodesDelete,
+  commentsDelete: episodesCommentsDelete,
+  commentsCreate: episodesCommentsCreate
 };

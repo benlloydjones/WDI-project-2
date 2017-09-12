@@ -17,8 +17,27 @@
             <div class="select">
               <select name="series">
                 <option disabled selected>Choose a series</option>
-                <% seriess.forEach(series => { %>
+                <% series.forEach(series => { %>
                   <option value="<%= series.id %>"><%= series.seriesName %></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="cast">Add cast members</label>
+          <div class="control">
+            <div class="select is-multiple">
+              <select class="castMemberMultipleEpisode" name="castMembers" multiple="multiple">
+                <% castMembers.forEach(castMember => { %>
+
+                  <option value="<%= castMember.id %>" <% if(castMember.appearsIn(episode)) { %>
+                    selected
+                  <% } %>>
+                    <%= castMember.firstname %> <%= castMember.lastname %>
+                  </option>
+
                 <% }) %>
               </select>
             </div>

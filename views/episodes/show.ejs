@@ -2,12 +2,78 @@
   <div class="columns is-multiline-mobile">
     <div class="column is-half-desktop is-12-mobile">
       <img src="<%= episode.image %>" alt="<%= episode.title %>">
+
+      <% episode.comments.forEach((comment) => { %>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img class="image is-64x64" src="<%= comment.commentor.image %>" alt="<%= comment.commentor.username %>">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong><%= comment.commentor.username %></strong>
+                <br>
+                <%= comment.comment %>
+                <br>
+                Rating: <%= comment.rating %>/10
+              </p>
+            </div>
+          </div>
+          <div class="media-right">
+            <% if(comment.commentor && locals.isAuthenticated && comment.commentor.id === locals.currentUser.id) { %>
+              <form action="/episodes/<%= episode.id %>/comments/<%= comment.id %>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="delete"></button>
+              </form>
+            <% } %>
+          </div>
+        </article>
+      <% }) %>
+
+      <%# can only create comment if user is logged in%>
+      <% if(locals.isAuthenticated) { %>
+        <div class="form">
+          <div class="commentAdder box">
+            <form method="POST" action="<%= episode.id %>/comments">
+              <input class="input" type="hidden" name="commentor" value="<%= locals.currentUser.id %>">
+              <div class="field">
+                <label class="label" for="comment">Your comment:</label>
+                <div class="control">
+                  <textarea class="textarea" rows="3" name="comment"></textarea>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="rating">Your rating</lable>
+                <div class="control">
+                  <div class="select">
+                    <select name="rating">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button class="button is-info">Submit</button>
+            </form>
+          </div>
+        </div>
+      <% } %>
     </div>
     <div class="column is-half-desktop is-12-mobile">
       <h2 class="title is-2"><%= episode.title %></h2>
-      <p><%= episode.synopsis %></p>
-
-
+      <p>
+        <%= episode.synopsis %>
+      </p>
       <% if(locals.isAuthenticated) { %>
         <div class="columns">
           <div class="column is-half">
@@ -21,9 +87,7 @@
           </div>
         </div>
       <% } %>
-
       <h3 class="title is-3">Cast list</h3>
-
       <% episode.castMembers.forEach( castMember => { %>
         <article class="media">
           <figure class="media-left">
@@ -40,7 +104,6 @@
           </div>
         </article>
       <% }) %>
-
     </div>
   </div>
 </div>

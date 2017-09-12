@@ -34,7 +34,7 @@
           <label class="label" for="cast">Add cast members</label>
           <div class="control">
             <div class="select is-multiple">
-              <select class="" name="castMembers" multiple="multiple">
+              <select class="castMemberMultipleEpisode" name="castMembers" multiple="multiple">
                 <% castMembers.forEach(castMember => { %>
 
                   <option value="<%= castMember.id %>" <% if(castMember.appearsIn(episode)) { %>

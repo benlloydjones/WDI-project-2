@@ -6,10 +6,6 @@ const castMembers = require('../controllers/castMembers');
 const sessions = require('../controllers/sessions');
 const secureRoute = require('../lib/secureRoute');
 
-// const sessions = require('../controllers/sessions');
-
-// const secureRoute = require('../lib/secureRoute');
-
 // this gets us to the homepage
 router.get('/', (req, res) => res.render('home',));
 
@@ -50,9 +46,12 @@ router.route('/episodes/:id')
 router.route('/episodes/:id/edit')
   .get(secureRoute, episodes.edit);
 
-// router.route('/episodes/:id/cast/edit')
-//   .get(episodes.castEdit)
-//   .put(episodes.castUpdate);
+// episode comments routes
+router.route('/episodes/:id/comments')
+  .post(secureRoute, episodes.commentsCreate);
+
+router.route('/episodes/:id/comments/:commentsId')
+  .delete(secureRoute, episodes.commentsDelete);
 
 // these are the castMember routes
 router.route('/castmembers')
