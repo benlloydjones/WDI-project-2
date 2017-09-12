@@ -9,7 +9,7 @@
     "seed": "node db/seeds"
   },
   "engines": {
-    "node": "7.10.0"
+    "node": "8.x.x"
   },
   "author": "Mike Hayden <mickyginger@gmail.com> (https://github.com/mickyginger)",
   "license": "ISC",
