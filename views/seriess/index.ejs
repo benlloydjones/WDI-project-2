@@ -3,7 +3,7 @@
   <p class="subtitle is-3">These are all the Star Trek series we have listed</p>
   <div class="columns is-multiline">
     <% seriess.forEach((series => { %>
-      <div class="column is-one-third-desktop is-half-mobile">
+      <div class="column is-one-third-desktop is-12-mobile">
         <div class="box">
             <a href="/seriess/<%= series.id %>"><img class="seriess image" src="<%= series.image %>" alt="<%= series.seriesName %>"></a>
           <a href="/seriess/<%= series.id %>"><h2 class="title is-2"><%= series.seriesName %></h2></a>
