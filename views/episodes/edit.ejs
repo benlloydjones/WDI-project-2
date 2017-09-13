@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="title is-1">Edit an episode</h1>
-  <div class="columns">
-    <div class="column is-half">
+  <div class="columns is-multiline-mobile">
+    <div class="column is-half-desktop is-12-mobile">
       <form method="POST" action="/episodes/<%= episode.id %>">
 
         <input type="hidden" name="_method" value="PUT">
