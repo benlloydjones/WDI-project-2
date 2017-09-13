@@ -12,6 +12,7 @@ function seriessIndex(req, res) {
 function seriessShow(req, res) {
   Series
     .findById(req.params.id)
+    .populate('episodes')
     .exec()
     .then(series => {
       return Episode

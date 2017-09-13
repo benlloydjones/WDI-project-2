@@ -11,12 +11,27 @@ seriesSchema.virtual('episodes', {
   foreignField: 'series'
 });
 
-seriesSchema.virtual('avgRating')
-  .get(function getSeriesRating() {
-    if(!this.episodes) return false;
-    const total = this.epsodes.reduce((sum, epsode) => sum + epsode.avgRating);
-    const avg = total / this.comment.length;
-    return Math.round(avg*2)/2;
-  });
+seriesSchema.virtual('avgRating').get(function() {
+  const avgRatings = [];
+  let length = 0;
+  if(this.episodes.length === 0) {
+    return 0;
+  } else {
+    this.episodes.forEach(episode => {
+      if(episode.comments.length === 0) {
+        avgRatings.push(0);
+        length += 1;
+      } else {
+        episode.comments.forEach(comment => {
+          avgRatings.push(comment.rating);
+          length += 1;
+        });
+      }
+    });
+  }
+  return Math.round((avgRatings.reduce((sum, rating) => {
+    return sum + rating;
+  }) / length)*2)/2;
+});
 
 module.exports = mongoose.model('Series', seriesSchema);
