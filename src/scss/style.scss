@@ -1,16 +1,23 @@
 @import "bulma/sass/utilities/initial-variables";
 
-$primary: #6ab5ff;
-$danger: #f9628b;
+$primary: yellowgreen;
+$info: dodgerblue;
+$danger: firebrick;
 // $family-serif: 'Playfair Display', serif;
 // $family-primary: $family-serif;
 
 @import "bulma/bulma";
 
+.enterprise {
+  background-image: url('/assets/images/enterprise.jpg');
+  background-position: center;
+  background-size: cover;
+  min-height: 568px;
+}
+.enterprise h1.title.is-1 {
+  color: white;
+}
 
-
-
-
-img.seriess {
-  max-width: 100%;
+.enterprise p.subtitle.is-3 {
+  color: white;
 }

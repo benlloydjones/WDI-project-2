@@ -3,7 +3,10 @@ const User = require('../models/user');
 function registrationsCreate(req, res) {
   User
     .create(req.body)
-    .then(() => res.redirect('/'))
+    .then(() => {
+      req.flash('info', 'Now please login');
+      res.redirect('/');
+    })
     .catch(err => res.render('error', { err }));
 }
 
